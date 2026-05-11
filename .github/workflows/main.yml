@@ -1,0 +1,37 @@
+name: TypeScript CI/CD
+
+# กำหนดให้ทำงานเมื่อมีการ Push หรือ Pull Request ใน branch main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. ดึงโค้ดจาก Repository ออกมา
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. ติดตั้ง Node.js (เปรียบเหมือนการเซต Python Environment)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # ใช้เวอร์ชันล่าสุดที่เสถียร
+          cache: 'npm'
+
+      # 3. ติดตั้ง Dependencies
+      # ใช้ npm ci แทน npm install เพื่อให้ได้เวอร์ชันที่ตรงกับเครื่องป๋าเป๊ะๆ
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. รัน Unit Test (หัวใจของ TDD)
+      - name: Run tests
+        run: npm test
+
+      # 5. สั่ง Build โปรเจกต์ (แปลง TS เป็น JS)
+      - name: Build project
+        run: npm run build
