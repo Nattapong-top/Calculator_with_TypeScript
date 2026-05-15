@@ -3,5 +3,6 @@ export default {
     testEnvironment: 'node',
     transform: {
         '^.+\\.ts$': ['ts-jest', { useESM: true }]
-    }
+    },
+    modulePathIgnorePatterns: ["<rootDir>/dist/"] // เพิ่มบรรทัดนี้ครับป๋า
 };

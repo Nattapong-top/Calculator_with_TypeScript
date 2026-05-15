@@ -1,3 +1,4 @@
+import { jest, describe, it, expect } from '@jest/globals';
 import { Calculator } from "../src/domain/Calculator";
 
 describe('Calculator', () => {
@@ -19,14 +20,35 @@ describe('Calculator', () => {
     it('ควรคูณเลข 20 ด้วย 5 แล้วได้ผลลัพธ์เป็น 100', () => {
         const calc = new Calculator();
         expect(calc.multiply(20, 5)).toBe(100)
-    
+
     });
 
     it('ควรจะโยน Error ออกมาเมื่อมีการหารด้วยเลข 0', () => {
         const calc = new Calculator();
         expect(() => calc.divide(10, 0)).toThrow('Cannot divide by zero');
     })
+});
 
+describe('Calculator with Persistence (New Feature)', () => {
+    // สร้าง Mock Repository
+    const mockRepo = {
+        save: jest.fn().mockImplementation(() => Promise.resolve()),
+        getAll: jest.fn()
+    } as any;
 
+    const calc = new Calculator(mockRepo);
+    const userName = 'Paa TopIT';
 
+    const result = calc.add(100, 111, userName);
+
+    expect(result).toBe(211);
+
+    // ตรวจสอบ mockRepo ถูกเรียกใช้งานจริง
+    expect(mockRepo.save).toHaveBeenCalledWith(
+        expect.objectContaining({
+            userName: userName,
+            operation: 'add',
+            result: 211
+        })
+    );
 });
