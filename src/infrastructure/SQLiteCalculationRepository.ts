@@ -1,7 +1,12 @@
 import 'dotenv/config';
 import Database from 'better-sqlite3';
+import fs from 'fs';
 import { CalculationRepository } from '../domain/CalculationRepository.js';
 import { Calculation } from '../domain/Calculation.js';
+
+if (!fs.existsSync('database')) {
+    fs.mkdirSync('database', { recursive: true });
+}
 
 export class SQLiteCalculationRepository implements CalculationRepository {
 
