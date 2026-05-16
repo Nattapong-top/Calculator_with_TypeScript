@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "isolatedModules": true,
     "outDir": "./dist", // ส่งไฟล์ที่คอมไพล์แล้วไปไว้ที่โฟลเดอร์ dist แยกต่างหาก
     "rootDir": "./", // กำหนด Root ของโปรเจกต์
     "strict": true,

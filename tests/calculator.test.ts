@@ -1,5 +1,5 @@
 import { jest, describe, it, expect } from '@jest/globals';
-import { Calculator } from "../src/domain/Calculator";
+import { Calculator } from "../src/domain/Calculator.js";
 
 describe('Calculator', () => {
     it('ควรบวกเลข 5 และ 10 ได้ผลลัพธ์เป็น 15', () => {
@@ -30,25 +30,27 @@ describe('Calculator', () => {
 });
 
 describe('Calculator with Persistence (New Feature)', () => {
-    // สร้าง Mock Repository
-    const mockRepo = {
-        save: jest.fn().mockImplementation(() => Promise.resolve()),
-        getAll: jest.fn()
-    } as any;
+    it('ควรส่งข้อมูลการคำนวณและชื่อ Paa TopIT ไปที่ Repository', async () => {
+        // สร้าง Mock Repository
+        const mockRepo = {
+            save: jest.fn().mockImplementation(() => Promise.resolve()),
+            getAll: jest.fn()
+        } as any;
 
-    const calc = new Calculator(mockRepo);
-    const userName = 'Paa TopIT';
+        const calc = new Calculator(mockRepo);
+        const userName = 'Paa TopIT';
 
-    const result = calc.add(100, 111, userName);
+        const result = calc.add(100, 111, userName);
 
-    expect(result).toBe(211);
+        expect(result).toBe(211);
 
-    // ตรวจสอบ mockRepo ถูกเรียกใช้งานจริง
-    expect(mockRepo.save).toHaveBeenCalledWith(
-        expect.objectContaining({
-            userName: userName,
-            operation: 'add',
-            result: 211
-        })
-    );
+        // ตรวจสอบ mockRepo ถูกเรียกใช้งานจริง
+        expect(mockRepo.save).toHaveBeenCalledWith(
+            expect.objectContaining({
+                userName: userName,
+                operation: 'add',
+                result: 211
+            })
+        );
+    })
 });

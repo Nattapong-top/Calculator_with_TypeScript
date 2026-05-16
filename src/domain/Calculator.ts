@@ -1,5 +1,5 @@
 // src/domain/Calculator.ts
-import { CalculationRepository } from './CalculationRepository';
+import { CalculationRepository } from './CalculationRepository.js';
 
 
 export class Calculator {

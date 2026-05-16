@@ -4,5 +4,8 @@ export default {
     transform: {
         '^.+\\.ts$': ['ts-jest', { useESM: true }]
     },
-    modulePathIgnorePatterns: ["<rootDir>/dist/"] // เพิ่มบรรทัดนี้ครับป๋า
+    modulePathIgnorePatterns: ["<rootDir>/dist/"],
+    moduleNameMapper: {
+        '^(\\.{1,2}/.*)\\.js$': '$1'
+    }
 };
