@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { jest, describe, it, expect } from '@jest/globals';
 import { Calculator } from "../src/domain/Calculator.js";
+import { SQLiteCalculationRepository } from '../src/infrastructure/SQLiteCalculationRepository.js';
 
 describe('Calculator', () => {
     it('ควรบวกเลข 5 และ 10 ได้ผลลัพธ์เป็น 15', () => {
@@ -56,9 +57,6 @@ describe('Calculator with Persistence (New Feature)', () => {
     })
 });
 
-// อย่าลืม import ตัวจริงเข้ามาด้านบนด้วยนะครับป๋า
-import { SQLiteCalculationRepository } from '../src/infrastructure/SQLiteCalculationRepository.js';
-
 describe('Calculator with Real Database (Integration Test)', () => {
     it('ควรจะบันทึกข้อมูลลง SQLite จริงและดึงกลับมาได้ถูกต้อง', async () => {
         // 1. Arrange: ใช้ Repository ตัวจริงที่ต่อกับ SQLite
@@ -82,3 +80,4 @@ describe('Calculator with Real Database (Integration Test)', () => {
         expect(savedRecord?.result).toBe(30);
     });
 });
+
