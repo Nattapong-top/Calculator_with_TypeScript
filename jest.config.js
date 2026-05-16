@@ -5,7 +5,8 @@ export default {
         '^.+\\.ts$': ['ts-jest', { useESM: true }]
     },
     modulePathIgnorePatterns: ["<rootDir>/dist/"],
+
     moduleNameMapper: {
-        '^(\\.{1,2}/.*)\\.js$': '$1'
+        '^(\\.{1,2}/.*)\\.js$': '$1',
     }
 };

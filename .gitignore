@@ -22,3 +22,5 @@ npm-debug.log*
 
 # --- หมายเหตุ: ผมเอา package-lock.json ออกจากลิสต์นี้แล้ว เพื่อให้ GitHub Actions ใช้คุมเวอร์ชันได้ครับ ---
 /generated/prisma
+
+/generated/prisma
