@@ -62,4 +62,7 @@ export class SQLiteCalculationRepository implements CalculationRepository {
 
         return stmt.all() as Calculation[];
     }
+    close(): void {
+        this.db.close(); // สั่งปิดท่อเชื่อมต่อไฟล์ .db
+    }
 }
