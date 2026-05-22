@@ -15,7 +15,7 @@ export function runCLI(args: string[]) : string {
     if (operation === 'add') {
         result = calc.add(a, b, userName);
         symbol = '+'
-    } else if (operation === 'sub') {
+    } else if (operation === 'sub' || operation === 'subtract') {
         result = calc.subtract(a, b, userName);
         symbol = '-'
     } else if (operation === 'divide') {
@@ -25,5 +25,6 @@ export function runCLI(args: string[]) : string {
         result = calc.multiply(a, b, userName);
         symbol = '*'
     }
-    return `ผลลัพธ์ของ ${userName}: ${a} ${symbol} ${b} = ${result}`;
+    const formattedResult = Number(Number(result).toFixed(2));
+    return `ผลลัพธ์ของ ${userName}: ${a} ${symbol} ${b} = ${formattedResult}`;
 }

@@ -5,7 +5,8 @@
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "calc": "tsc && node dist/src/main.js"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",

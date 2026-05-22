@@ -43,7 +43,7 @@ export class Calculator {
         if (b == 0) {
             throw new Error('Cannot divide by zero');
         }
-        return this.execute(a, b, 'divide', (x, y) => x / y, userName);
+        return this.execute(a, b, 'divide', (x, y) => Number((x / y).toFixed(2)), userName);
     };
 
     multiply(a: number, b: number, userName?: string): number {
