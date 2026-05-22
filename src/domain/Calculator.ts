@@ -19,7 +19,7 @@ export class Calculator {
     ): number {
         const result = calcFn(a, b);
         if (this.repository && userName) {
-            this.repository.save({
+            void this.repository.save({
                 userName,
                 operation,
                 a,

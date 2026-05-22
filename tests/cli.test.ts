@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { describe, it, expect, beforeAll, afterAll} from '@jest/globals';
+import { describe, it, expect, beforeAll, afterAll, } from '@jest/globals';
 
 import {runCLI} from "../src/cli.js";
 import {SQLiteCalculationRepository} from "../src/infrastructure/SQLiteCalculationRepository.js";
@@ -90,5 +90,16 @@ describe('CLI Integration Tests (บวก ลบ คูณ หาร ป้อ�
         expect(latestRecord).toBeDefined();
         expect(latestRecord?.operation).toBe('divide');
         expect(latestRecord?.result).toBe(5.44);
+    });
+
+    it('ควรแจ้งเตือนข้อความ Error เมื่อใส่ตัวหารเป็นเลข 0', async () => {
+        const userName = "Paa Test Divide by Zero";
+        const output = runCLI(['divide', '49', '0', userName]);
+
+        expect(output).toBe('เกิดข้อผิดพลาด: Cannot divide by zero');
+
+        const history = await repo.getAll();
+        const latestRecord = history.find(h => h.userName === userName);
+        expect(latestRecord).toBeUndefined();
     })
 })
