@@ -96,10 +96,27 @@ describe('CLI Integration Tests (บวก ลบ คูณ หาร ป้อ�
         const userName = "Paa Test Divide by Zero";
         const output = runCLI(['divide', '49', '0', userName]);
 
-        expect(output).toBe('เกิดข้อผิดพลาด: Cannot divide by zero');
+        expect(output).toBe('❌ เกิดข้อผิดพลาด: Cannot divide by zero');
 
         const history = await repo.getAll();
         const latestRecord = history.find(h => h.userName === userName);
         expect(latestRecord).toBeUndefined();
     })
 })
+
+// 💡 เพิ่มต่อท้ายไฟล์ tests/cli.test.ts เพื่อทดสอบพลังเวอร์ชัน 2 (Expression Mode)
+describe('CLI Version 2: โหมดแกะสมการทางลัด', () => {
+    it('ควรคำนวณเวอร์ชัน 2 แบบเคาะช่องว่าง "10 + 10" ได้ถูกต้อง', async () => {
+        const userName = 'Paa_V2_Space';
+        const output = runCLI(['10 + 10', userName]);
+
+        expect(output).toBe('ผลลัพธ์ของ Paa_V2_Space: 10 + 10 = 20');
+    });
+
+    it('ควรคำนวณเวอร์ชัน 2 แบบพิมพ์ติดกัน "49/9" ได้ถูกต้อง', async () => {
+        const userName = 'Paa_V2_Tight';
+        const output = runCLI(['49/9', userName]);
+
+        expect(output).toBe('ผลลัพธ์ของ Paa_V2_Tight: 49 / 9 = 5.44');
+    });
+});
